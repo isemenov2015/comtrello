@@ -14,5 +14,6 @@ public class LoginTest extends BrowserFactory {
     public void login() throws InterruptedException {
         loginPage.open();
         loginPage.login("sumigoxuci@mailsource.info", "werter321");
+        boardsPage.openBoard("TestBoard");
     }
 }

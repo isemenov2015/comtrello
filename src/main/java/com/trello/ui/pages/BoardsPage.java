@@ -7,6 +7,10 @@ public class BoardsPage {
 
     private static final String PATH = "isemenov/boards";
 
+    public Elem boardByUrlName(String urlName){
+        return new Elem(By.cssSelector(".board-tile[href*='"+urlName+"']"), urlName);
+    }
+
     public void open() {
 
     }
@@ -16,6 +20,6 @@ public class BoardsPage {
     }
 
     public void openBoard(String urlName) {
-        new Elem((By.cssSelector(".board-tile[href='" + urlName + "']")), urlName).click();
+        boardByUrlName(urlName).click();
     }
 }
