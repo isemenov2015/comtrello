@@ -31,7 +31,7 @@ public class CardActions extends BrowserFactory {
 
     @Test
     public void openCard() {
-        cardPage.open();
+        cardPage.open("");
     }
 
     @Test(dependsOnMethods = {"login", "openCard"})
