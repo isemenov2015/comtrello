@@ -51,11 +51,11 @@ public class TrelloAPILogin extends BrowserFactory {
 
         driver().get("https://trello.com");
         for (Cookie cookie : cookieStorage.cookies) {
-            //System.out.println(cookie.name() + ": " + cookie.value());
+            System.out.println(cookie.name() + ": " + cookie.value());
             org.openqa.selenium.Cookie seleniumCookie = new org.openqa.selenium.Cookie(cookie.name(), cookie.value());
             driver().manage().addCookie(seleniumCookie);
         }
+        Thread.sleep(2000);
         driver().navigate().refresh();
-        Thread.sleep(1000);
     }
 }
