@@ -33,7 +33,7 @@ public class TrelloAPILogin {
                 .build();
         Request request = new Request.Builder().url("https://trello.com/authentication").post(formData).build();
         String response = client.newCall(request).execute().body().string();
-        Map<String, String> map =gson.fromJson(response, new TypeToken<Map<String, String>>(){}.getType());
+        Map<String, String> map = gson.fromJson(response, new TypeToken<Map<String, String>>(){}.getType());
         String code = map.get("code");
         System.out.println("CODE: " + code);
 
