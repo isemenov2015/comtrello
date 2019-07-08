@@ -12,21 +12,19 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.trello.core.BrowserFactory.driver;
-
 public class TrelloAPILogin extends BrowserFactory {
 
     CookieStorage cookieStorage = new CookieStorage();
     OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieStorage).build();
-    Gson gson = new Gson();
 
     @Test
     public void testCookies() throws IOException {
         client.newCall(new Request.Builder().url("https://trello.com").build()).execute().body().string();
     }
 
-    @Test
+    @Test(dependsOnMethods = {"testCookies"})
     public void loginByApi() throws IOException, InterruptedException {
+        Gson gson = new Gson();
 
         FormBody formData = new FormBody.Builder()
                 .add("method", "password")
