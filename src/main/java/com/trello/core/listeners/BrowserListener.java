@@ -1,4 +1,4 @@
-package com.trello.core;
+package com.trello.core.listeners;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 public class BrowserListener implements WebDriverEventListener {
 
     private Logger logger = LoggerFactory.getLogger(BrowserListener.class);
+
     @Override
     public void beforeAlertAccept(WebDriver webDriver) {
 
@@ -32,8 +33,8 @@ public class BrowserListener implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeNavigateTo(String s, WebDriver webDriver) {
-
+    public void beforeNavigateTo(String url, WebDriver webDriver) {
+        logger.info("Navigate: '"+url+"'");
     }
 
     @Override

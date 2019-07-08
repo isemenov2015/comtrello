@@ -1,5 +1,6 @@
 package com.trello.core;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -18,22 +19,25 @@ public class Elem {
         this.name = name;
     }
 
+    public Elem(By by) {
+        this(by, "");
+    }
+
     public WebElement find() {
 
         return getWebDriverWait(10).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    public Elem(By by) {
-        this(by, "");
-    }
-
+    @Step
     public void click() {
-        driver().findElement(by).click();
+
+        find().click();
     }
 
+    @Step
     public void type(String text) {
-        driver().findElement(by).clear();
-        driver().findElement(by).sendKeys(text);
+        find().clear();
+        find().sendKeys(text);
     }
 
     public boolean isPresent() {

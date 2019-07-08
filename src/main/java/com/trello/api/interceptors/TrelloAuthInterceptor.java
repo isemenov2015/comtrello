@@ -14,7 +14,7 @@ public class TrelloAuthInterceptor implements Interceptor {
 
 
     @Override
-    public Response intercept(Interceptor.Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
         HttpUrl originalHttpUrl = original.url();
 

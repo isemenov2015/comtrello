@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeTest;
 public class BrowserFactory {
 
     private static WebDriver driver;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(BrowserFactory.class);
 
     @BeforeTest
     public void setUp() {

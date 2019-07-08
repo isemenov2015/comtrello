@@ -2,6 +2,7 @@ package junk;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.trello.core.BrowserFactory;
 import okhttp3.Cookie;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -13,7 +14,8 @@ import java.util.Map;
 
 import static com.trello.core.BrowserFactory.driver;
 
-public class TrelloAPILogin {
+public class TrelloAPILogin extends BrowserFactory {
+
     CookieStorage cookieStorage = new CookieStorage();
     OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieStorage).build();
     Gson gson = new Gson();
@@ -31,11 +33,13 @@ public class TrelloAPILogin {
                 .add("factors[user]", "sumigoxuci@mailsource.info")
                 .add("factors[password]", "werter321")
                 .build();
-        Request request = new Request.Builder().url("https://trello.com/authentication").post(formData).build();
+        Request request = new Request.Builder().url("https://trello.com/1/authentication").post(formData).build();
         String response = client.newCall(request).execute().body().string();
         Map<String, String> map = gson.fromJson(response, new TypeToken<Map<String, String>>(){}.getType());
         String code = map.get("code");
         System.out.println("CODE: " + code);
+
+        System.out.println(cookieStorage.cookies);
 
         //SESSION
         String dsc = cookieStorage.cookies.stream().filter(cookie -> cookie.name().equals("dsc")).findFirst().get().value();
@@ -43,7 +47,7 @@ public class TrelloAPILogin {
                 .add("authentication", code)
                 .add("dsc", dsc)
                 .build();
-        Request requestSession = new Request.Builder().url("https://trello.com/authorization/session").post(sessionFormData).build();
+        Request requestSession = new Request.Builder().url("https://trello.com/1/authorization/session").post(sessionFormData).build();
         response = client.newCall(requestSession).execute().body().string();
         System.out.println(response);
 
